@@ -66,8 +66,8 @@ const AreaCliente = () => {
       title: "Outros Arquivos", // Botão solicitado para a página interna
       icon: FolderOpen,
       url: "/arquivos", // Rota interna
-      external: true,
-      color: "bg-[#E06E28] hover:bg-[#C55E1F]" // Diferenciei um pouco para destacar que é interno
+      external: false,
+      color: "bg-[#E06E28] hover:bg-[#C55E1F]"
     }
   ];
 
@@ -243,7 +243,7 @@ const AreaCliente = () => {
                                 <div className="w-full">
                                   <div className="flex justify-between items-start mb-6">
                                     {/* Ícone Azul para diferenciar interno */}
-                                    <div className="h-14 w-14 rounded-xl bg-slate-100 text-navy-dark flex items-center justify-center shadow-inner group-hover:bg-navy-dark group-hover:text-white transition-colors duration-300">
+                                    <div className="h-14 w-14 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center shadow-inner group-hover:bg-orange-500 group-hover:text-white transition-colors duration-300">
                                       <btn.icon className="h-7 w-7" />
                                     </div>
                                   </div>

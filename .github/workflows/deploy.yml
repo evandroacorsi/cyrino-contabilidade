@@ -1,0 +1,72 @@
+name: Deploy Cyrino Contabilidade
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Install cloudflared
+        run: |
+          curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
+          chmod +x cloudflared
+          sudo mv cloudflared /usr/local/bin/
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          cat >> ~/.ssh/config << 'EOF'
+          Host ssh-site2025.cyrinocontabilidade.com.br
+            ProxyCommand cloudflared access ssh --hostname %h
+            StrictHostKeyChecking no
+            User root
+            IdentityFile ~/.ssh/id_ed25519
+          EOF
+
+      - name: Backup persistentes no servidor
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} '
+            cp -r /var/www/cyrino-contabilidade/news /tmp/news-backup 2>/dev/null || true
+            cp -r /var/www/cyrino-contabilidade/uploads /tmp/uploads-backup 2>/dev/null || true
+          '
+
+      - name: Deploy arquivos
+        run: |
+          rsync -avz --delete \
+            --exclude='news/' \
+            --exclude='uploads/' \
+            -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -o ProxyCommand='cloudflared access ssh --hostname %h'" \
+            ./dist/ \
+            ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/cyrino-contabilidade/
+
+      - name: Restaurar persistentes e ajustar permissões
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} '
+            cp -r /tmp/news-backup /var/www/cyrino-contabilidade/news 2>/dev/null || true
+            cp -r /tmp/uploads-backup /var/www/cyrino-contabilidade/uploads 2>/dev/null || true
+            chown -R www-data:www-data /var/www/cyrino-contabilidade/
+            chmod -R 755 /var/www/cyrino-contabilidade/
+            chmod -R 775 /var/www/cyrino-contabilidade/news /var/www/cyrino-contabilidade/uploads
+            echo "Deploy concluído: $(date)"
+          '

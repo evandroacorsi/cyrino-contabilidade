@@ -1,0 +1,72 @@
+[
+  {
+    "id": "cofre-digital",
+    "category": "Arquivos",
+    "title": "Cofre Digital",
+    "image": "/client-tools/cofre-digital.png",
+    "url": "https://drive.cyrinocontabilidade.com.br/index.php/login",
+    "external": true,
+    "order": 1,
+    "active": true
+  },
+  {
+    "id": "emissor-de-notas",
+    "category": "Notas Fiscais",
+    "title": "Emissor de Notas",
+    "image": "/client-tools/nota-facil.png",
+    "url": "https://emissor.cyrinocontabilidade.com.br/",
+    "external": true,
+    "order": 2,
+    "active": true
+  },
+  {
+    "id": "onvio",
+    "category": "Portal do Cliente",
+    "title": "ONVIO",
+    "image": "/client-tools/onvio.png",
+    "url": "https://onvio.com.br/clientcenter/pt/auth?r=%2Fhome",
+    "external": true,
+    "order": 3,
+    "active": true
+  },
+  {
+    "id": "banco-cora",
+    "category": "Contábil",
+    "title": "Banco Cora",
+    "image": "/client-tools/cora.png",
+    "url": "https://lp.cora.com.br/coraliados/?code=cyrino-contabilidade&n=Cyrino%20Contabilidade%20Ltda",
+    "external": true,
+    "order": 4,
+    "active": true
+  },
+  {
+    "id": "sieg-xml",
+    "category": "XML - Notas Fiscais",
+    "title": "SIEG - XML",
+    "image": "/client-tools/sieg.png",
+    "url": "https://auth.sieg.com/login",
+    "external": true,
+    "order": 5,
+    "active": true
+  },
+  {
+    "id": "nota-facil-rural",
+    "category": "Arquivos",
+    "title": "Drive de Documentos",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Google_Drive_icon_%282020%29.svg/3840px-Google_Drive_icon_%282020%29.svg.png",
+    "url": "https://drive.google.com/drive/folders/1Q2v-gCtWWRzULkqb2NeK2nToyxCt7D_l?usp=drive_link",
+    "external": true,
+    "order": 6,
+    "active": true
+  },
+  {
+    "id": "outros-arquivos",
+    "category": "Arquivos",
+    "title": "Outros Arquivos",
+    "image": "",
+    "url": "/arquivos",
+    "external": false,
+    "order": 7,
+    "active": true
+  }
+]

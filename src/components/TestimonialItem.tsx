@@ -1,7 +1,16 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, Star } from "lucide-react";
-const TestimonialItem = ({ testimonial, googleBadge }: { testimonial: any, googleBadge: string }) => {
+
+type Testimonial = {
+    rating: number;
+    text: string;
+    name: string;
+    date: string;
+    link: string;
+};
+
+const TestimonialItem = ({ testimonial, googleBadge }: { testimonial: Testimonial, googleBadge: string }) => {
     return (
         <Card className="w-[300px] md:w-[400px] h-[350px] shrink-0 flex flex-col bg-gradient-to-br from-white to-secondary/5 backdrop-blur-sm border-0 shadow-strong border-t-4 border-secondary/30 hover:scale-[1.02] transition-transform duration-300">
             <CardContent className="pt-6 flex flex-col h-full">

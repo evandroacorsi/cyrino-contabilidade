@@ -1,6 +1,9 @@
+import type { LucideIcon } from "lucide-react";
+import { FileText, Calculator, TrendingUp, AlertCircle, Building2, Briefcase } from "lucide-react";
+
 export interface BlogPost {
   slug: string;
-  icon: any;
+  icon: LucideIcon;
   title: string;
   excerpt: string;
   category: string;
@@ -13,8 +16,6 @@ export interface BlogPost {
     items?: string[];
   }>;
 }
-
-import { FileText, Calculator, TrendingUp, AlertCircle, Building2, Briefcase } from "lucide-react";
 
 export const blogPosts: BlogPost[] = [
   {

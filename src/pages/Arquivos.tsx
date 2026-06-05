@@ -99,7 +99,7 @@ const Arquivos = () => {
 
                     <LinkSection title="Emissor de Nota Fiscal" delay={700}>
                         <LinkButton
-                            href="https://app.emissorfacil.com.br/login"
+                            href="https://sistema.emissor.app/login"
                             icon="receipt"
                         >
                             Emissor Fácil

@@ -4,19 +4,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
 import { FaWhatsapp } from "react-icons/fa";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  Send,
-  MessageCircle
-} from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Send, MessageCircle } from "lucide-react";
 import whatsapp from "@/assets/WhatsApp.png";
-
-import InputMask from "react-input-mask";
+import SEO from "@/components/SEO";
 
 const Contato = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +15,7 @@ const Contato = () => {
     email: "",
     phone: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,30 +52,37 @@ const Contato = () => {
     window.open(`https://wa.me/${whatsappNumber}?text=${encoded}`, "_blank");
   };
 
-
   const contactInfo = [
     {
       icon: MapPin,
       title: "Endereço",
-      content: "Rua Expedicionário Brasileiro, 350, Sala 6\nCentro, Rancharia - SP\nCEP 19600-007",
-      link: "https://maps.google.com/?q=Rua+Expedicionário+Brasileiro+350+Rancharia+SP"
+      content:
+        "Rua Expedicionário Brasileiro, 350, Sala 6\nCentro, Rancharia - SP\nCEP 19600-007",
+      link: "https://maps.google.com/?q=Rua+Expedicionário+Brasileiro+350+Rancharia+SP",
     },
     {
       icon: Phone,
       title: "Telefone",
-      content: `(18) 3265-7176 ${'\n'} Whatsapp Oficial`,
-      link: "tel:+551832657176"
+      content: `(18) 3265-7176 ${"\n"} Whatsapp Oficial`,
+      link: "tel:+551832657176",
     },
     {
       icon: Clock,
       title: "Horário de Atendimento",
-      content: "Segunda-Feira a Sexta-Feira\nManhã: 8h às 11h\nTarde: 13h às 17h",
-      link: null
-    }
+      content:
+        "Segunda-Feira a Sexta-Feira\nManhã: 8h às 11h\nTarde: 13h às 17h",
+      link: null,
+    },
   ];
 
   return (
     <div className="min-h-screen pt-20">
+      <SEO
+        title="Contato | Cyrino Contabilidade"
+        description="Entre em contato com a Cyrino Contabilidade. Atendimento contábil especializado para empresas e MEI. Fale via WhatsApp ou formulário."
+        url="https://www.cyrinocontabilidade.com.br/contato"
+        image="https://www.cyrinocontabilidade.com.br/og-image.jpg"
+      />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-orange-500 to-secondary text-white py-20">
         <div className="container mx-auto px-4">
@@ -119,8 +117,14 @@ const Contato = () => {
                   {info.link ? (
                     <a
                       href={info.link}
-                      target={info.link.startsWith("http") ? "_blank" : undefined}
-                      rel={info.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                      target={
+                        info.link.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel={
+                        info.link.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
                       className="text-sm text-muted-foreground hover:text-primary transition-colors whitespace-pre-wrap break-words leading-relaxed"
                       style={{ wordBreak: "break-word" }}
                     >
@@ -149,7 +153,6 @@ const Contato = () => {
                   Envie uma Mensagem
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
-
                   <div>
                     <Label htmlFor="name">Nome Completo *</Label>
                     <Input
@@ -212,7 +215,9 @@ const Contato = () => {
                     className="w-full font-semibold"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Enviando..." : (
+                    {isSubmitting ? (
+                      "Enviando..."
+                    ) : (
                       <>
                         <Send className="mr-2 h-4 w-4" />
                         Enviar
@@ -244,12 +249,16 @@ const Contato = () => {
               {/* WhatsApp Card */}
               <Card className="border-2 border-[#25D366] bg-gradient-to-br from-[#25D366]/10 to-[#128C7E]/10 flex-1 flex items-center">
                 <CardContent className="p-8 text-center w-full">
-                  <img src={whatsapp} className="h-16 w-16 text-[#25D366] mx-auto mb-4" />
+                  <img
+                    src={whatsapp}
+                    className="h-16 w-16 text-[#25D366] mx-auto mb-4"
+                  />
                   <h3 className="font-heading text-xl font-bold mb-3 text-foreground">
                     Prefere WhatsApp?
                   </h3>
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    Fale diretamente com nossa equipe através do WhatsApp. Resposta rápida e atendimento personalizado!
+                    Fale diretamente com nossa equipe através do WhatsApp.
+                    Resposta rápida e atendimento personalizado!
                   </p>
                   <Button
                     className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-semibold"
@@ -281,7 +290,9 @@ const Contato = () => {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                 <div>
-                  <p className="font-semibold text-foreground mb-1">Razão Social:</p>
+                  <p className="font-semibold text-foreground mb-1">
+                    Razão Social:
+                  </p>
                   <p className="text-muted-foreground">Cyrino Contabilidade</p>
                 </div>
                 <div>
@@ -289,12 +300,18 @@ const Contato = () => {
                   <p className="text-muted-foreground">26.700.412/0001-28</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground mb-1">Responsável Técnico:</p>
-                  <p className="text-muted-foreground">Rodrigo Cyrino Ribeiro</p>
+                  <p className="font-semibold text-foreground mb-1">
+                    Responsável Técnico:
+                  </p>
+                  <p className="text-muted-foreground">
+                    Rodrigo Cyrino Ribeiro
+                  </p>
                 </div>
                 <div>
                   <p className="font-semibold text-foreground mb-1">CRC:</p>
-                  <p className="text-muted-foreground">1SP 289664 | 2SP 038081</p>
+                  <p className="text-muted-foreground">
+                    1SP 289664 | 2SP 038081
+                  </p>
                 </div>
               </div>
             </CardContent>

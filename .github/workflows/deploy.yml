@@ -25,8 +25,10 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Install cloudflared
+      - name: Install cloudflared and rsync
         run: |
+          sudo apt-get update
+          sudo apt-get install -y rsync
           curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
           chmod +x cloudflared
           sudo mv cloudflared /usr/local/bin/

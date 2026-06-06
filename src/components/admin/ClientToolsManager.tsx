@@ -23,6 +23,8 @@ const getSessionToken = async () => {
 const getErrorMessage = (error: unknown) =>
   error instanceof Error ? error.message : "Ocorreu um erro inesperado.";
 
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
+
 const createInitialForm = (nextOrder: number): ClientToolInput => ({
   ...emptyClientTool,
   order: nextOrder,
@@ -139,6 +141,16 @@ export function ClientToolsManager() {
   const handleLogoUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      toast({
+        title: "Arquivo muito grande",
+        description: "A imagem anexada deve ter no máximo 5 MB.",
+        variant: "destructive",
+      });
+      event.target.value = "";
+      return;
+    }
 
     try {
       setUploadingLogo(true);

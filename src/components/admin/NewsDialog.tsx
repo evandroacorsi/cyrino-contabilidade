@@ -55,6 +55,7 @@ type MediaPagination = {
 };
 
 const MEDIA_PAGE_SIZE = 12;
+const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
 
 const getErrorMessage = (error: unknown) =>
   error instanceof Error ? error.message : "Ocorreu um erro inesperado.";
@@ -364,6 +365,16 @@ export function NewsDialog({ open, onOpenChange, editingNews, onSuccess }: NewsD
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
+      if (file.size > MAX_IMAGE_SIZE) {
+        toast({
+          title: "Arquivo muito grande",
+          description: "A imagem anexada deve ter no máximo 5 MB.",
+          variant: "destructive",
+        });
+        e.target.value = "";
+        return;
+      }
+
       await uploadFile(file, mediaTarget);
     }
   };

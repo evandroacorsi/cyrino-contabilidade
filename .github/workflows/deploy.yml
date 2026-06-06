@@ -46,6 +46,13 @@ jobs:
             IdentityFile ~/.ssh/id_ed25519
           EOF
 
+      - name: Install rsync on server
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} '
+            apt-get update
+            apt-get install -y rsync
+          '
+
       - name: Backup persistentes no servidor
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} '
